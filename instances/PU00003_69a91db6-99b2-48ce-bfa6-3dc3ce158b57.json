@@ -1,0 +1,1 @@
+{"id": "69a91db6-99b2-48ce-bfa6-3dc3ce158b57", "rule": "PU00003", "available_sensors": {" NEASCHWvqGxALR3 Pump VFD Speed %": "Number", " NEASCHWAMIrSBJm Schedule": "Bool", " NEASCHWm0B72n8X Pump Occupied": "Bool", "type": "Str", "subType": "Str", "Status": "Bool", "1cb8340d-55ca59ef Outdoor Air Temperature": "Number"}}

@@ -1,0 +1,1 @@
+{"id": "fbae15c5-9113-438c-8d34-d365048e15e5", "rule": "CC00007", "available_sensors": {"B7UyfDkvM4 FCU 1-7 Setpoint Temperature": "Number", "B7qGOJzoCa FCU 1-7 Cooling Valve %": "Number", "B79gH6fYJ5 FCU 1-7 Run Status": "Bool", "BOLKJYwZ72wOqjql FCU 1-7 Schedule": "Bool", "B7sxD6mm2N FCU 1-7 Return Air Temperature": "Number", "type": "Str", "subType": "Str", "Status": "Bool"}}

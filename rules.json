@@ -1,0 +1,1081 @@
+{
+    "PD00002": {
+        "rule name": "PDU - Under Utilized",
+        "current logic": [
+            "Power Input > 0.1 KW",
+            "Power Input < 5% of 650 KW",
+            "Met for 3 Hours"
+        ],
+        "utterance": "If power input is greater than 0.1kW but less than 5% of 650kW for 3 hours, raise an anomaly",
+        "variables": [
+            "Power Input"
+        ],
+        "complexity": 3.0184617127
+    },
+    "BR00005": {
+        "rule name": "Boiler \u2013 Conductivity Out of Spec - Too Low",
+        "current logic": [
+            "Boiler Running",
+            "Conductivity < 0.003 S",
+            "Met for 4 Hours"
+        ],
+        "utterance": "In case the boiler is running but measuring a conductivity of 0.003 for more than 4 hours, alert the system",
+        "variables": [
+            "Boiler Running",
+            "Conductivity"
+        ],
+        "complexity": 6.0369234254
+    },
+    "BR00006": {
+        "rule name": "Boiler \u2013 Conductivity Out of Spec - Too High",
+        "current logic": [
+            "Boiler Running",
+            "Conductivity > 0.004 S",
+            "Met for 4 Hours"
+        ],
+        "utterance": "Flag an anomaly is the boiler is running and the conductivity is more than 0.004 for four hours or more",
+        "variables": [
+            "Boiler Running",
+            "Conductivity"
+        ],
+        "complexity": 6.0369234254
+    },
+    "CC00005": {
+        "rule name": "CRAC - Not Running and Should Be",
+        "current logic": [
+            "CRAC NOT Running",
+            "Schedule = 1 IF Reporting, otherwise assume 24\/7",
+            "Met for 2 Hours"
+        ],
+        "utterance": "In case we see 2 consecutive hours where the CRAC is not running while scheduled (if there's no schedule we assume it should be running) to do so there is an anomaly.",
+        "variables": [
+            "CRAC NOT Running",
+            "Schedule"
+        ],
+        "complexity": 8.0156097709
+    },
+    "CC00007": {
+        "rule name": "CRAC \u2013 Limited Cooling Chilled Water Valve Shut",
+        "current logic": [
+            "CRAC Running IF Reporting, Otherwise Assume ON",
+            "Chilled Water Valve % < 5%",
+            "Met for 8 Hours"
+        ],
+        "utterance": "If the CRAC is running (or just assume it's on in case of uncertainty) but the valve that regulates the chilled water is less than 5% open and stays like so for more than 8h it's anomalous",
+        "variables": [
+            "CRAC Running",
+            "Chilled Water Valve %"
+        ],
+        "complexity": 8.0156097709
+    },
+    "CR00011": {
+        "rule name": "Chiller - Excessive Power use in chiller that is off",
+        "current logic": [
+            "Run Status = 0",
+            "Power Input > 5 KW",
+            "Met for 3 Hours"
+        ],
+        "utterance": "If the chiller is not running, but the power input is larger than 5 kilowatts for more than 3 hours, raise an anomaly flag.",
+        "variables": [
+            "Run Status",
+            "Power Input"
+        ],
+        "complexity": 6.0369234254
+    },
+    "AH00049": {
+        "rule name": "AHU -  Static Pressure in Duct When Unit Commanded Off",
+        "current logic": [
+            "Supply Fan Status = 0 ",
+            "Subtype NOT MULTI or VAV",
+            "Duct Static Pressure > 0.2 in H2O",
+            "Met for 3 Hours"
+        ],
+        "utterance": "The behaviour of non MULTI or non VAV type asset is anomalous if the supply fan is off and the static pressure in the duct is greater than .2 H2O for more than 3 hours straight.",
+        "variables": [
+            "Supply Fan Status",
+            "Duct Static Pressure"
+        ],
+        "complexity": 8.0156097709
+    },
+    "CT00003": {
+        "rule name": "Cooling Tower - Condenser Water Temperature Setpoint Attainment",
+        "current logic": [
+            "(Condenser Water Supply To Chiller Temperature - Condenser Water Temperature Setpoint) > 6 \u00b0F",
+            "OAT < 80 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "It's anomalous that in days where the outside temp is less than 80 the difference between the temp of the condenser water supply to the chiller and its setpoint is greater than 6 for more than 2 consecutive hours",
+        "variables": [
+            "Condenser Water Supply To Chiller Temperature",
+            "Condenser Water Temperature Setpoint",
+            "Outdoor Air Temperature (OAT)"
+        ],
+        "complexity": 9.0553851381
+    },
+    "BR00004": {
+        "rule name": "Boiler - Low Delta T on System",
+        "current logic": [
+            "Boiler Running",
+            "Supply Temperature - Return Temperature < 5 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "If, for more than two hours, the boiler is running but the absolute difference between supply and return temperatures is less than 5F",
+        "variables": [
+            "Boiler Running",
+            "Supply Temperature",
+            "Return Temperature"
+        ],
+        "complexity": 9.0553851381
+    },
+    "CC00003": {
+        "rule name": "CRAC - Potential Energy Savings",
+        "current logic": [
+            "CRAC Running IF Reporting, Otherwise Assume ON",
+            "3 \u00b0F < (Return Air Temperature - Supply Air Temperature) < 10 \u00b0F",
+            "Met for 4 Hours"
+        ],
+        "utterance": "There is an anomaly in the CRAC if, for more than 4 hours, the CRAC is shown to be running (if uncertain we assume it's on) and the difference between return and supply temperature stays within 3 and 10 degrees.",
+        "variables": [
+            "CRAC Running",
+            "Return Air Temperature",
+            "Supply Air Temperature"
+        ],
+        "complexity": 12.0234146564
+    },
+    "CT00001": {
+        "rule name": "Cooling Tower - Setpoint Attainment Pressure",
+        "current logic": [
+            "ABS(Condenser Water Pressure Difference - Condenser Water Pressure Difference Setpoint) > 5 PSI",
+            "OAT < 95 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "There is a cooling tower anomaly if the outside air temp is less than 95F, but the absolute difference between the condenser water pressure difference setpoint and the condenser water pressure difference is greater thaan 5 psi for two hours",
+        "variables": [
+            "Condenser Water Pressure Difference",
+            "Condenser Water Pressure Difference Setpoint",
+            "OAT (Outside Air Temperature)"
+        ],
+        "complexity": 9.0553851381
+    },
+    "CR00002": {
+        "rule name": "Chiller - Cooling Substance Temperature Setpoint Attainment",
+        "current logic": [
+            "Chiller Running",
+            "Supply Temperature - Setpoint Temperature > 5 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An alert needs to be raised in chase the chiller is running and the difference between supply and setpoint temperatures is greater than 5F for a consecutive period of 2 hours or more.",
+        "variables": [
+            "Chiller Running",
+            "Supply Temperature",
+            "Setpoint Temperature"
+        ],
+        "complexity": 9.0553851381
+    },
+    "CR00008": {
+        "rule name": "Chiller - Evaporator Approach High",
+        "current logic": [
+            "Chiller Running",
+            "Supply Temperature - Liquid Refrigerant Evaporator Temperature > 4 \u00b0F",
+            "Met for 3 Hours"
+        ],
+        "utterance": "More than 3 hours with the chiller on and and the difference between the supply and the refrigerant temperature in the evaporator greater than 4 F is anomalous",
+        "variables": [
+            "Chiller Running",
+            "Supply Temperature",
+            "Liquid Refrigerant Evaporator Temperature"
+        ],
+        "complexity": 9.0553851381
+    },
+    "CR00009": {
+        "rule name": "Chiller - Condenser Approach High",
+        "current logic": [
+            "Chiller Running",
+            "Condenser Liquid Refrigerant Temperature - Condenser Water Return To Tower Temperature > 4 \u00b0F",
+            "Met for 3 Hours"
+        ],
+        "utterance": "If the delta between the condenser temp and the return water to the tower is greater than 4 Farhenheit deg for at least 3 hours then raise an alert",
+        "variables": [
+            "Chiller Running",
+            "Condenser Liquid Refrigerant Temperature",
+            "Condenser Water Return To Tower Temperature"
+        ],
+        "complexity": 9.0553851381
+    },
+    "CR00003": {
+        "rule name": "Chiller - Low Supply Temperature",
+        "current logic": [
+            "Chiller Running",
+            "(Setpoint Temperature - Supply Temperature) > 3 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "There's an anomaly if the chiller is on and the setpoint temperature minus the supply is continuously greater than 2 degF for more than 2 hours.",
+        "variables": [
+            "Chiller Running",
+            "Setpoint Temperature",
+            "Supply Temperature"
+        ],
+        "complexity": 9.0553851381
+    },
+    "CC00011": {
+        "rule name": "CRAC \u2013 Discharge Control Under Setpoint",
+        "current logic": [
+            "CRAC Running IF Reporting, Otherwise Assume ON",
+            "Temperature Setpoint < 65 \u00b0F",
+            "Temperature Setpoint - Supply Air Temperature > 4 \u00b0F",
+            "Met for 3 Hours"
+        ],
+        "utterance": "If the CRAC is on or unknown, and the temperature setpoint is less than 65, and the difference between the temp setpoint and the supply air temp is more than 4F for more than 3 hours, raise an alert.",
+        "variables": [
+            "CRAC Running",
+            "Temperature Setpoint",
+            "Supply Air Temperature"
+        ],
+        "complexity": 15.0119952038
+    },
+    "AH00053": {
+        "rule name": "AHU -  Belt Issue Current Low",
+        "current logic": [
+            "Subtype NOT VAV",
+            "Supply Fan Status = 1",
+            "Supply Fan Current < 1 Amp",
+            "Met for 3 Hours"
+        ],
+        "utterance": "An alert should be raised for non-VAV units if for more than 3 hours, they supply fan is on but the current is less than 1 amp",
+        "variables": [
+            "Subtype",
+            "Supply Fan Status",
+            "Supply Fan Current"
+        ],
+        "complexity": 12.0234146564
+    },
+    "PU00001": {
+        "rule name": "Pump - Excessive Loading of Supply Variable Frequency Drive",
+        "current logic": [
+            "Pump Running",
+            "Pump VFD Speed % > 97%",
+            "OAT < 95 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "If, for two hours or more, the outside air temp is less than 95F but the pump is running and its VFD speed is greater than 97%, raise an excessive loading alert",
+        "variables": [
+            "Pump Running",
+            "Pump VFD Speed %",
+            "OAT"
+        ],
+        "complexity": 12.0234146564
+    },
+    "PU00005": {
+        "rule name": "Pump - Hot Water Circulating Pump Running When it is Hot Outside",
+        "current logic": [
+            "Pump Running",
+            "SubType Is HW",
+            "Outside Air Temperature > 70 \u00b0F",
+            "Met for 2 hours"
+        ],
+        "utterance": "If the outside air temp is more than 70F, and the pump is running for more than two hours, raise an alert for HW subtype",
+        "variables": [
+            "Pump Running",
+            "SubType",
+            "Outside Air Temperature"
+        ],
+        "complexity": 12.0234146564
+    },
+    "TU00005": {
+        "rule name": "Terminal Unit - Supply Air Flow is Zero and Damper is Open",
+        "current logic": [
+            "Parent AHU Running",
+            "Supply Air Flow < 10 cfm",
+            "VAV Damper > 20 %",
+            "Met for 3 Hours"
+        ],
+        "utterance": "When the parent AHU is running, but the supply air flow is less than 10 cubic feet and the VAV damper is more than 20%, raise an alert if this persists for 3 hours.",
+        "variables": [
+            "Parent AHU Running",
+            "Supply Air Flow",
+            "VAV Damper"
+        ],
+        "complexity": 12.0234146564
+    },
+    "HX00004": {
+        "rule name": "HXU - Valve Problem",
+        "current logic": [
+            "Heating Valve < 5%",
+            "Hot Water Temperature > 90 \u00b0F",
+            "Hot Water System drained = 0 IF Reporting",
+            "Met for 2 Hours"
+        ],
+        "utterance": "Raise an alert if, for more than two hours, the heating valve is less than 5%, the hot water temp is more than 90F, and the system is not drained or unknown.",
+        "variables": [
+            "Heating Valve",
+            "Hot Water Temperature",
+            "Hot Water System drained"
+        ],
+        "complexity": 15.0119952038
+    },
+    "CC00010": {
+        "rule name": "CRAC \u2013 Discharge Control Over Setpoint",
+        "current logic": [
+            "CRAC Running IF Reporting, Otherwise Assume ON",
+            "Temperature Setpoint < 65 \u00b0F",
+            "Supply Air Temperature - Temperature Setpoint > 3 \u00b0F",
+            "Met for 3 Hours"
+        ],
+        "utterance": "If the CRAC is running or unknown, the difference between the supply air temp and the setpoint is greater than 3F, and the setpoint is less than 65F, all for three hours, raise an anomaly flag.",
+        "variables": [
+            "CRAC Running",
+            "Temperature Setpoint",
+            "Supply Air Temperature"
+        ],
+        "complexity": 15.0119952038
+    },
+    "TU00008": {
+        "rule name": "Terminal Unit - Supply Air Flow When Parent AHU is Off",
+        "current logic": [
+            "Parent AHU NOT Running",
+            "SubType NOT FCU",
+            "Supply Air Flow > 80 CFM",
+            "Met for 2 Hours"
+        ],
+        "utterance": "Raise an anomaly if the subtype is not FCU, the parent AHU isn't running, and the supply airflow is more than 80 cubic feet per metre, and this persists for more than two hours.",
+        "variables": [
+            "Parent AHU",
+            "SubType",
+            "Supply Air Flow"
+        ],
+        "complexity": 12.0234146564
+    },
+    "AH00039": {
+        "rule name": "AHU - Verify humidification is commanded Properly when arid",
+        "current logic": [
+            "AHU Running",
+            "Enthalpy < 35 kJ\/kg",
+            "Humidification Valve % < 5%",
+            "Met for 2 Hours"
+        ],
+        "utterance": "In normal operation, while the AHU is running the humidification valve should be more than 5%, and the enthalpy should be more than 35 kJ\/kg. If these conditions are not met for two hours or more, then raise an anomaly.",
+        "variables": [
+            "AHU Running",
+            "Enthalpy",
+            "Humidification Valve %"
+        ],
+        "complexity": 12.0234146564
+    },
+    "AH00036": {
+        "rule name": "AHU - Humidifying on a Humid day",
+        "current logic": [
+            "AHU Running",
+            "Enthalpy > 29 BTU\/lb",
+            "Humidification Valve % > 2%",
+            "Met for 1 Hour"
+        ],
+        "utterance": "If the AHU is running for more than one hour while the enthalpy is greater than 29 and the humidification valve is more than 2%, this is anomalous.",
+        "variables": [
+            "AHU Running",
+            "Enthalpy",
+            "Humidification Valve %"
+        ],
+        "complexity": 12.0234146564
+    },
+    "AH00028": {
+        "rule name": "AHU - Reheat Valve Full Open for an Excessive Amount of Time",
+        "current logic": [
+            "AHU Running",
+            "OAT > 35 \u00b0F",
+            "Reheat Valve % > 97%",
+            "Met for 4 Hours"
+        ],
+        "utterance": "When the outside temperature is more than 35F, the AHU is running and the reheat valve is more than 97%, this is anomalous. Flag when this occurs for 4 hours or more.",
+        "variables": [
+            "AHU Running",
+            "OAT (Outside Air Temperature)",
+            "Reheat Valve %"
+        ],
+        "complexity": 12.0234146564
+    },
+    "TU00006": {
+        "rule name": "Terminal Unit - Heating Valve is Not Holding When Closed",
+        "current logic": [
+            "(Heating Valve = 0% OR Hot Deck Damper % = 0%",
+            "Discharge Air Temp (supply) - Parent Discharge Air Temp (supply) > 10 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 3 parts. (1) Either the heating valve is equal to 0 percent or the hot deck damper percentage is equal to 0 percent. (2) The difference between the discharge air temperature (supply) and the parent discharge air temperature (supply) is greater than 10\u00b0F. (3) The rule is triggered when all three parts of the condition are met for 2 hours.",
+        "variables": [
+            "Heating Valve",
+            "Hot Deck Damper %",
+            "Discharge Air Temp (supply)",
+            "Parent Discharge Air Temp (supply)"
+        ],
+        "complexity": 12.0738468508
+    },
+    "CR00007": {
+        "rule name": "Chiller - Load Low",
+        "current logic": [
+            "Chiller Running",
+            "(Chiller % Loaded < 30%",
+            "OR Actual Amps \/ Full Load Amps < 30% IF Chiller % Loaded NOT Available)",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition for the rule is that the chiller is running and either of the following are true: the chiller load is less than 30% or if the load is not available the ratio of actual amperage to full load amps is less than 30%. The rule is triggered when the condition is met for two hours.",
+        "variables": [
+            "Chiller Running",
+            "Chiller % Loaded",
+            "Actual Amps",
+            "Full Load Amps"
+        ],
+        "complexity": 24.0092574738
+    },
+    "HX00003": {
+        "rule name": "HXU -  Hot Water System Achieving Delta T",
+        "current logic": [
+            "Heating Valve > 50%",
+            "ABS(Hot Water Temperature - Hot Water Return Temperature) < 4 \u00b0F",
+            "Hot Water System Drained = 0 IF Reporting",
+            "Met for 2 Hours"
+        ],
+        "utterance": "Whenever for more than 2 hours the heating valve is more than 50% open and the absolute difference between the hot water temperature and the hot water return temperature is less than 4 degrees, and if available the hot water system drained flag is 0; raise an anomaly.",
+        "variables": [
+            "Heating Valve",
+            "Hot Water Temperature",
+            "Hot Water Return Temperature",
+            "Hot Water System Drained"
+        ],
+        "complexity": 20.0159936051
+    },
+    "PU00003": {
+        "rule name": "Pump - Heating Pump on When it Should be Off",
+        "current logic": [
+            "Pump Running [Pump Status = 1 OR Pump Current In Amps >= 1]",
+            "Pump Occupied = 0",
+            "OAT > 55 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition for the rule has three parts. (1) The Pump Status is 1 or the Pump Current in Amps is greater than 1.  (2) The Pump Occupied flag is 0.  (3) The OAT is greater than 55 degrees F.  The rule is triggered when all three parts of the condition are met for two hours.",
+        "variables": [
+            "Pump Status",
+            "Pump Current In Amps",
+            "OAT (Outside Air Temperature)",
+            "Pump Occupied"
+        ],
+        "complexity": 16.0312195419
+    },
+    "AH00052": {
+        "rule name": "AHU -  No Duct Static Pressure When Unit Commanded On",
+        "current logic": [
+            "Supply Fan Status = 1 ",
+            "Subtype NOT MULTI or VAV",
+            "Duct Static Pressure < 0.01 inH2O",
+            "Flow < 100 CFM IF Reporting",
+            "Met for 3 Hours"
+        ],
+        "utterance": "An anomaly is detected when the supply fan is on, the system is not a MULTI or VAV subtype, and the duct static pressure is extremely low (below 0.01\u202finH2O). If airflow data is available, the airflow is also low (less than 100\u202fCFM). These conditions must persist for at least 3 hours.",
+        "variables": [
+            "Supply Fan Status",
+            "Subtype",
+            "Duct Static Pressure",
+            "Flow"
+        ],
+        "complexity": 24.0092574738
+    },
+    "CT00005": {
+        "rule name": "Cooling Tower \u2013 Condenser Water is too cold",
+        "current logic": [
+            "Cooling Tower Running",
+            "(Condenser Water Supply Temperature to Chiller < Condenser Water Temperature Setpoint - 4 \u00b0F",
+            "OR Condenser Water Supply Temperature to Chiller < 55 \u00b0F IF Condenser Water Temperature Setpoint NOT Reporting)",
+            "OAT > 43 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "Whenever a cooling tower is on, if the condesner water supply temp is less than the setpoint minus 4 or, in case the setpoint is not known, the supply temp to the chiller is less than 55 degrees while the outside air temperature is more than 43 F and this happens for more than 2 hours, then there is an anomaly",
+        "variables": [
+            "Cooling Tower Running",
+            "Condenser Water Supply Temperature to Chiller",
+            "Condenser Water Temperature Setpoint",
+            "Outdoor Air Temperature (OAT)"
+        ],
+        "complexity": 28.0058302968
+    },
+    "TU00001": {
+        "rule name": "Terminal Unit - Supply Air Flow Setpoint Attainment",
+        "current logic": [
+            "Parent AHU Running",
+            "(Supply Air Flow outside > Supply Air Flow Setpoint + 25%",
+            "OR Supply Air Flow outside < Supply Air Flow Setpoint - 25%)",
+            "OAT < 90 \u00b0F",
+            "Met for 3 Hours"
+        ],
+        "utterance": "The condition for the rule has three parts. (1) The Parent AHU is running.  (2) The Supply Air Flow outside is greater than the Supply Air Flow Setpoint plus 25%; or Supply Air Flow outside is less than Supply Air Flow Setpoint minus 25%.  (3) The OAT is less than 90 degrees F.  The rule is triggered when all three parts of the condition are met for three hours.",
+        "variables": [
+            "AHU Running",
+            "Supply Air Flow outside",
+            "Supply Air Flow Setpoint",
+            "OAT (Outside Air Temperature)"
+        ],
+        "complexity": 24.0092574738
+    },
+    "AH00044": {
+        "rule name": "AHU - Static Pressure Setpoint Attainment",
+        "current logic": [
+            "AHU Running",
+            "ABS(Static Pressure Setpoint \u2013 Static Pressure) > 0.2 in H2O",
+            "Static Pressure Setpoint > 0",
+            "Supply Fan Output % < 95%",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An anomaly is detected when the AHU is running, the difference between the static pressure setpoint and actual static pressure exceeds 0.2 in H\u2082O, the static pressure setpoint is above zero, and the supply fan output is below 95%. These conditions must persist for at least 2 hours.",
+        "variables": [
+            "AHU Running",
+            "Static Pressure Setpoint",
+            "Static Pressure",
+            "Supply Fan Output %"
+        ],
+        "complexity": 20.0159936051
+    },
+    "CR00010": {
+        "rule name": "Chiller - Chilled water differential pressure setpoint attainment",
+        "current logic": [
+            "Chiller Running",
+            "ABS(Coolant Pressure Difference - Coolant Pressure Difference Setpoint) > 4 PSI",
+            "OR ABS((Supply Coolant Pressure - Return Coolant Pressure) - Coolant Pressure Difference Setpoint) > 4 PSI IF Coolant Pressure Difference NOT Reporting",
+            "Met for 3 Hours"
+        ],
+        "utterance": "The condition has 3 parts. (1) The chiller is running. (2) The absolute difference between the coolant pressure difference and its setpoint is greater than 4 PSI; or, if coolant pressure difference is not reporting, the absolute difference between supply coolant pressure minus return coolant pressure and the setpoint is greater than 4 PSI. (3) The rule is triggered when all three parts of the condition are met for 3 hours.",
+        "variables": [
+            "Chiller Running",
+            "Coolant Pressure Difference",
+            "Coolant Pressure Difference Setpoint",
+            "Supply Coolant Pressure",
+            "Return Coolant Pressure",
+            "Coolant Pressure Difference Reporting"
+        ],
+        "complexity": 36.0138862107
+    },
+    "AH00014": {
+        "rule name": "AHU - Mixed air less than Supply when AHU is Commanded OFF (Valve Leaking By or Damper Issue)",
+        "current logic": [
+            "AHU NOT Running",
+            "SubType NOT MULTI",
+            "(Supply Air Temperature - Mixed Air Temperature) > 20 \u00b0F",
+            "OAT > 35 \u00b0F",
+            "Met for 3 Hours"
+        ],
+        "utterance": "If the AHU (not of type MULTI) is off and the delta betweend the supply air temperature and the mixed air temperature is more than 20F while the outside temperature is greater than 35 degrees, all for more than 3hours than raise an anomaly.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Supply Air Temperature",
+            "Mixed Air Temperature",
+            "OAT (Outside Air Temperature)"
+        ],
+        "complexity": 25.0199920064
+    },
+    "PU00004": {
+        "rule name": "Pump - Not Making Pressure Setpoint Attainment",
+        "current logic": [
+            "Pump Running",
+            "Pump VFD Speed Reporting",
+            "OAT < 95 \u00b0F",
+            "ABS(Pump Differential Pressure - Pump Differential Pressure Setpoint) >  4psi",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 5 parts. (1) The pump is running. (2) The pump VFD speed is reporting. (3) The outdoor air temperature is less than 95\u00b0F. (4) The absolute difference between the pump differential pressure and the pump differential pressure setpoint is greater than 4 PSI. (5) The rule is triggered when all five parts of the condition are met for 2 hours.",
+        "variables": [
+            "Pump Running",
+            "Pump VFD Speed Reporting",
+            "OAT (Outside Air Temperature)",
+            "Pump Differential Pressure",
+            "Pump Differential Pressure Setpoint"
+        ],
+        "complexity": 25.0199920064
+    },
+    "AH00035": {
+        "rule name": "AHU - System Heating while in Cooling Mode",
+        "current logic": [
+            "AHU Running",
+            "Cooling Valve Reporting",
+            "Heating Valve % = 0%",
+            "(Supply Air Temperature - Mixed Air Temperature) > 5 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An anomaly is detected when the AHU is running, the cooling valve is reporting, the heating valve is fully closed (0%), and the supply air temperature is more than 5\u202f\u00b0F higher than the mixed air temperature. These conditions must persist continuously for at least 2 hours.",
+        "variables": [
+            "AHU Running",
+            "Cooling Valve Reporting",
+            "Heating Valve %",
+            "Supply Air Temperature",
+            "Mixed Air Temperature"
+        ],
+        "complexity": 25.0199920064
+    },
+    "AH00040": {
+        "rule name": "AHU - Excess Humidification into Zone",
+        "current logic": [
+            "AHU Running",
+            "Enthalpy < 15 BTU\/lb",
+            "((Zone Relative Humidity % - Supply Relative Humidity Setpoint %) > 10%",
+            "OR (Supply Relative Humidity % - Supply Relative Humidity Setpoint %) > 10%)",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 3 parts.  (1) The AHU is running.  (2) The Enthalpy is less than 15 BTUs per pound.  (3) The difference between the Zone Relative Humidity % and the Supply Relative Humidity Setpoint % is more than 10%; or the difference between supply relative humidity %  and the supply relative humidity setpoint percent is more than 10%.  The rule is triggered when all 3 parts of the condition are met for 2 hours.",
+        "variables": [
+            "AHU Running",
+            "Enthalpy",
+            "Zone Relative Humidity %",
+            "Supply Relative Humidity Setpoint %",
+            "Supply Relative Humidity %"
+        ],
+        "complexity": 30.0115718423
+    },
+    "AH00032": {
+        "rule name": "AHU - System Cooling while in heating mode",
+        "current logic": [
+            "AHU Running",
+            "Heating Valve % > 5%",
+            "Cooling Valve % = 0%",
+            "(Mixed Air Temperature - Supply Air Temperature) > 5 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "If the AHU is running with the heating valve more than 5% open and cooling valve fully closed and the temperature delta between the mixed air and supply air is greater than 5 and this coditions persist for more than 2 hours then we have an anomaly.",
+        "variables": [
+            "AHU Running",
+            "Heating Valve %",
+            "Cooling Valve %",
+            "Mixed Air Temperature",
+            "Supply Air Temperature"
+        ],
+        "complexity": 25.0199920064
+    },
+    "AH00026": {
+        "rule name": "AHU - Heating Valve Full Open for an Excessive Amount of Time",
+        "current logic": [
+            "AHU Running for 6 hours",
+            "Outside Air Damper % Reporting",
+            "OAT > 35 \u00b0F",
+            "Heating Valve % > 97%",
+            "Heating Drained Flag = 1 IF Reporting",
+            "Met for 4 Hours"
+        ],
+        "utterance": "The condition has 5 parts.  (1) The AHU has been running for 6 hours.  (2) The Outside Air Damper % is Reporting.  (3) The OAT is greater than 35 degrees F.  (4) The heating vallve % is greater than 97%.  (5) The heating drained flag is reporting and equal to 1.  The rule is triggered when all five parts of the condition are met for 4 hours.",
+        "variables": [
+            "AHU Running",
+            "Outside Air Damper %",
+            "OAT (Outside Air Temperature)",
+            "Heating Valve %",
+            "Heating Drained Flag"
+        ],
+        "complexity": 35.007287871
+    },
+    "BR00001": {
+        "rule name": "Boiler - Excess O2 in stack",
+        "current logic": [
+            "Boiler Running",
+            "(Natural Gas Flow > 5 AND Flue Gas Oxygen % > 3%",
+            "OR Fuel Oil Flow > 5 AND Flue Gas Oxygen % > 5%",
+            "OR Propane Flow > 5 AND Flue Gas Oxygen % > 5%",
+            "OR Flue Gas Oxygen % > 3% IF Natural Gas\/Fuel Oil\/Propane NOT Reporting)",
+            "Met for 2 hours"
+        ],
+        "utterance": "An anomaly is detected when the boiler is running and the flue gas oxygen percentage is higher than expected, based on the type of fuel being used. Specifically, the flue gas oxygen is: >\u202f3% when natural gas flow is above 5, >\u202f5% when fuel oil or propane flow is above 5, or simply >\u202f3% if no fuel flow data is available. These conditions must persist for at least 2 hours.",
+        "variables": [
+            "Boiler Running",
+            "Natural Gas Flow",
+            "Flue Gas Oxygen %",
+            "Fuel Oil Flow",
+            "Propane Flow"
+        ],
+        "complexity": 50.0024999375
+    },
+    "AH00056": {
+        "rule name": "AHU - Economizer Mode Alert - Preheating With Fresh Air Intake Higher Than Min",
+        "current logic": [
+            "AHU Running",
+            "Economizer Mode = 1",
+            "Preheat Valve % > 5%",
+            "(Outside Air Damper % > Outside Air Damper Min %",
+            "OR Outside Air Damper % is > 15% IF Outside Air Damper Min % NOT Reporting)",
+            "Met for 2 Hours"
+        ],
+        "utterance": "if for more than 2 hours the AHU is functioning in economizer mode with a preheat valve more than 5% open and the outside air damper is greater than either 15% or the outside air damper min % if available, then we have an anomaly.",
+        "variables": [
+            "AHU Running",
+            "Economizer Mode",
+            "Preheat Valve %",
+            "Outside Air Damper %",
+            "Outside Air Damper Min %"
+        ],
+        "complexity": 40.0048825145
+    },
+    "HX00005": {
+        "rule name": "HXU - Running When Not Needed",
+        "current logic": [
+            "Hot Water System Drained = 0 IF Reporting",
+            "Heating System Status On",
+            "OAT > 65 \u00b0F",
+            "Heating Valve < 5%",
+            "Hot Water Temperature > 90 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition for the rule has five parts. (1) Hot Water System Drained is reporting and equal to zero.  (2) Heating System Status is on.  (3) The OAT is greater than 65 degrees F.  (4) The Heating Valve is less than 5%.  (5) The Hot Water Temperature is greater than 90 degrees F.  The rule is triggered when all five parts of the condition are met for two hours.",
+        "variables": [
+            "Hot Water System Drained",
+            "Heating System Status",
+            "OAT (Outside Air Temperature)",
+            "Heating Valve",
+            "Hot Water Temperature"
+        ],
+        "complexity": 35.007287871
+    },
+    "TU00002": {
+        "rule name": "Terminal Unit - Supply Air Flow is Constant",
+        "current logic": [
+            "Parent AHU Running",
+            "Supply Air Flow is Not Changing (+\/-) 2% Prev. Day Average",
+            "VAV Damper > 20 %",
+            "ABS(Supply Air Flow - Previous Day Average) < 1",
+            "Met for 3 Hours"
+        ],
+        "utterance": "The condition has 4 parts. (1) The parent AHU is running. (2) The supply air flow is not changing by more than plus or minus 2 percent compared to the previous day's average. (3) The VAV damper is greater than 20 percent. (4) The absolute difference between the supply air flow and the previous day's average is less than 1. The rule is triggered when all four parts of the condition are met for 3 hours.",
+        "variables": [
+            "Parent AHU Running",
+            "Supply Air Flow",
+            "Previous Day Average",
+            "VAV Damper",
+            "Supply Air Flow (again)",
+            "Previous Day Average (again)"
+        ],
+        "complexity": 30.0239904077
+    },
+    "AH00033": {
+        "rule name": "AHU - Economizer Mode Alert - Preheating with Damper Open",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT OAU",
+            "(Outside Air Damper % > Outside Air Damper Minimum %",
+            "OR Outside Air Damper % > 15% AND Outside Air Damper Minimum % Not Reporting)",
+            "Outside Air Damper % NOT = 100%",
+            "Preheat Valve % > 5%",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An event is classified as anomlaous if the AHU is not an OAU and it is running, the outside air damper % is greater than the minimum damper % (if there's no minimum damper % available, assume the minimum is 15%) but less than 100% and the preheat valave is more than 5% open. If all the conditions persist from ore than 2 hourse it's an anomaly.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Outside Air Damper %",
+            "Outside Air Damper Minimum %",
+            "Preheat Valve %"
+        ],
+        "complexity": 40.0048825145
+    },
+    "AH00012": {
+        "rule name": "AHU - Filters Need Replacement",
+        "current logic": [
+            "AHU Running",
+            "(Filter Differential Pressure > Supply Filter Static Pressure Setpoint",
+            "OR (Post Filter Bank Pressure - Pre Filter Bank Pressure) > Supply Filter Static Pressure Setpoint IF Filter Differential Pressure NOT Reporting) OR > 1.0 if SFSPS is not reporting",
+            "Supply Fan Output % > 50%",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An anomaly is detected when the AHU is running, and either the filter differential pressure exceeds the supply filter static pressure setpoint, or the difference between post- and pre-filter bank pressures exceeds the setpoint (or 1.0 if the setpoint isn\u2019t available). At the same time, the supply fan output is above 50%. These conditions must persist for at least 2 hours.",
+        "variables": [
+            "AHU Running",
+            "Filter Differential Pressure",
+            "Supply Filter Static Pressure Setpoint",
+            "Post Filter Bank Pressure",
+            "Pre Filter Bank Pressure",
+            "Supply Fan Output %",
+            "SFSPS (Supply Filter Static Pressure Setpoint)"
+        ],
+        "complexity": 49.0102030194
+    },
+    "AH00054": {
+        "rule name": "AHU - Outside Air Flow Setpoint Attainment",
+        "current logic": [
+            "AHU Running",
+            "Subtype NOT VAV or OAU or FCU",
+            "Economizer Mode = 0",
+            "Outside Air Flow >\/< Outside Air Flow Setpoint * 1.10%",
+            "OAT < 90 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 5 parts. (1) The AHU is running. (2) The subtype is not VAV, OAU, or FCU. (3) The economizer mode is equal to 0. (4) The outside air flow is either greater than 110 percent or less than 90 percent of the outside air flow setpoint. (5) The outdoor air temperature is less than 90\u00b0F. The rule is triggered when all five parts of the condition are met for 2 hours.",
+        "variables": [
+            "AHU Running",
+            "Subtype",
+            "Economizer Mode",
+            "Outside Air Flow",
+            "Outside Air Flow Setpoint",
+            "OAT"
+        ],
+        "complexity": 36.0138862107
+    },
+    "AH00001": {
+        "rule name": "AHU - Simultaneous Heating and Cooling",
+        "current logic": [
+            "AHU Running",
+            "Cooling Valve % >= 5%",
+            "(Heating Valve % >= 5% OR Preheat Valve % >= 5%)",
+            "(Heating Drained Flag = 0 IF Reporting",
+            "AND\/OR Cooling Drained Flag = 0 IF Reporting)",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An anomaly is detected when the AHU is running, the cooling valve is open at 5% or more, and either the heating valve or preheat valve is also open at 5% or more. At the same time, if reported, neither the heating nor cooling drained flags are active. These conditions must persist for at least 2 hours.",
+        "variables": [
+            "AHU Running",
+            "Cooling Valve %",
+            "Heating Valve %",
+            "Preheat Valve %",
+            "Heating Drained Flag",
+            "Cooling Drained Flag"
+        ],
+        "complexity": 48.0058590174
+    },
+    "AH00025": {
+        "rule name": "AHU - Heating Valve Leaking by when Commanded Closed",
+        "current logic": [
+            "AHU NOT Running",
+            "35 \u00b0F < OAT < 70 \u00b0F",
+            "((Heating Valve % = 0% OR Preheat Valve % = 0%)",
+            "OR (Heating Valve % = 0% AND Preheat Valve % = 0% IF Both Reporting))",
+            "(Supply Air Temperature > 90 \u00b0F OR Mixed Air Temperature > 90 \u00b0F)",
+            "Heating Drained Flag = 1 IF Reporting",
+            "Met for 3 Hours"
+        ],
+        "utterance": "An anomaly is detected when the Air Handling Unit (AHU) is off, the outside air temperature is between 35\u00b0F and 70\u00b0F, heating or preheat valves are fully closed if they are available, supply or mixed air temperatures exceed 90\u00b0F, and if applicable, the heating drained flag is active. Raise a flag if this status is sustained for at least three hours.",
+        "variables": [
+            "AHU Running",
+            "OAT",
+            "Heating Valve %",
+            "Preheat Valve %",
+            "Supply Air Temperature",
+            "Mixed Air Temperature",
+            "Heating Drained Flag"
+        ],
+        "complexity": 70.0034999125
+    },
+    "AH00034": {
+        "rule name": "AHU - Economizer Check during High Humidity",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT OAU or FCU",
+            "Enthalpy > 29 BTU\/lb",
+            "(Economizer Mode = 1",
+            "OR Outside Air Damper % > Outside Air Damper Minimum % AND Economizer Mode Not Reporting",
+            "OR Outside Air Damper % > 15% AND Outside Air Damper Minimum % Not Reporting AND Economizer Mode Not Reporting)",
+            "Return Air CO2 Not Reporting",
+            "Met for 2 Hours"
+        ],
+        "utterance": "An anomaly is detected when the AHU is running, is not an OAU or FCU subtype, and the air enthalpy exceeds 29\u202fBTU\/lb. At the same time, the system appears to be in economizer mode\u2014either explicitly (economizer mode = 1), inferred from the outside air damper position being above its minimum, or if the damper is open more than 15% with no minimum or economizer mode data available. Additionally, return air CO\u2082 data is not being reported. These conditions must persist for at least 2 hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Enthalpy",
+            "Economizer Mode",
+            "Outside Air Damper %",
+            "Outside Air Damper Minimum %",
+            "Return Air CO2"
+        ],
+        "complexity": 70.0034999125
+    },
+    "AH00002": {
+        "rule name": "AHU - Heating Valve Open when Warm Outside",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT VAV",
+            "(OAT - Supply Air Temperature Setpoint > 5 \u00b0F",
+            "OR OAT - Supply Air Temperature > 5 \u00b0F AND Supply Air Temperature Setpoint Not Reporting)",
+            "(Heating Valve % > 10% OR Preheat Valve % > 10%)",
+            "Heating Drained Flag = 1 IF Reporting",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 6 parts. (1) The AHU is running. (2) The subtype is not VAV. (3) The outdoor air temperature minus the supply air temperature setpoint is greater than 5\u00b0F; or, if the supply air temperature setpoint is not reporting, the outdoor air temperature minus the supply air temperature is greater than 5\u00b0F. (4) Either the heating valve percentage is greater than 10 percent or the preheat valve percentage is greater than 10 percent. (5) The heating drained flag is equal to 1 if reporting. (6) The rule is triggered when all six parts of the condition are met for 2 hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "OAT (Outdoor Air Temperature)",
+            "Supply Air Temperature Setpoint",
+            "Supply Air Temperature",
+            "Heating Valve %",
+            "Preheat Valve %",
+            "Heating Drained Flag"
+        ],
+        "complexity": 72.0054867594
+    },
+    "AH00013": {
+        "rule name": "AHU - Mixed air greater than Supply when AHU is Commanded OFF (Valve Leaking By or Damper Issue)",
+        "current logic": [
+            "AHU NOT Running",
+            "SubType NOT MULTI or PU",
+            "Duct Static Pressure < 0.1 in H2O IF Reporting",
+            "35 \u00b0F < OAT < 80 \u00b0F",
+            "(Mixed Air Temperature - Supply Air Temperature) > 10 \u00b0F",
+            "(Heating Drained Flag = 1 IF Reporting",
+            "AND\/OR Cooling Drained Flag = 1 IF Reporting)",
+            "Met for 3 Hours"
+        ],
+        "utterance": "An anomaly is detected when the AHU is off, the system is not a MULTI or PU subtype, and the outside air temperature is between 35\u202f\u00b0F and 80\u202f\u00b0F. If available, duct static pressure is low (below 0.1\u202finH\u2082O). Meanwhile, the mixed air temperature is more than 10\u202f\u00b0F higher than the supply air temperature, and either the heating or cooling drained flag is active, if those values are reported. These conditions must persist for at least 3 hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Duct Static Pressure",
+            "OAT",
+            "Mixed Air Temperature",
+            "Supply Air Temperature",
+            "Heating Drained Flag",
+            "Cooling Drained Flag"
+        ],
+        "complexity": 88.0030052079
+    },
+    "AH00016": {
+        "rule name": "AHU - Hot Outside and Outside Air Damper Open Greater than Minimum",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT OAU or FCU",
+            "Economizer Mode = 0 IF Economizer Mode Reporting",
+            "OAT > Return Air Temperature",
+            "Return Air CO2 < 1000 IF Return Air CO2 Reporting",
+            "(Outside Air Damper % > (Outside Air Damper Minimum % + 2%)",
+            "OR Outside Air Damper % > 15% AND Outside Air Damper Minimum % Not Reporting)",
+            "Enthalpy > Return Enthalpy IF Reporting",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 8 parts. (1) The AHU is running. (2) The subtype is not OAU or FCU. (3) The economizer mode is equal to 0 if economizer mode is reporting. (4) The outdoor air temperature is greater than the return air temperature. (5) The return air CO2 is less than 1000 if return air CO2 is reporting. (6) The outside air damper percentage is greater than the outside air damper minimum percentage plus 2 percent; or, if the outside air damper minimum percentage is not reporting, the outside air damper percentage is greater than 15 percent. (7) The enthalpy is greater than the return enthalpy if reporting. (8) The rule is triggered when all eight parts of the condition are met for 2 hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Economizer Mode",
+            "OAT (Outside Air Temperature)",
+            "Return Air Temperature",
+            "Return Air CO2",
+            "Outside Air Damper %",
+            "Outside Air Damper Minimum %",
+            "Enthalpy",
+            "Return Enthalpy"
+        ],
+        "complexity": 130.0022758108
+    },
+    "AH00011": {
+        "rule name": "AHU - Cooling Valve Open when Cold Outside",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT FCU or OAU",
+            "Outside Air Damper % < 95%",
+            "Economizer Mode = 1 IF Reporting",
+            "Enthalpy < 28 IF Reporting",
+            "37 \u00b0F < OAT < (Setpoint Temperature)",
+            "Cooling Valve % > 5%",
+            "(Heating Drained Flag = 1 IF Reporting",
+            "AND\/OR Cooling Drained Flag = 1 IF Reporting)",
+            "Met for 2 Hours"
+        ],
+        "utterance": "Whenever an AHU is running (and is not tagged as FCU or OAV), it's an anomaly if the outside air damper is less than 95% open, the cooling valve is more than 5% open and the outside temperature is within 37F and the setpoint temperature. If an enthalpy signal is available and less than 28 then it contributes to the anomaly. Additionally, if the signal economiser, heat drained and cooling drained are avilable and set to 1 they are part of the anomalous behaviour. Raise an anomaly if the previous status persists for more than 2 hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Outside Air Damper %",
+            "Economizer Mode",
+            "Enthalpy",
+            "OAT (Outside Air Temperature)",
+            "Setpoint Temperature",
+            "Cooling Valve %",
+            "Heating Drained Flag",
+            "Cooling Drained Flag"
+        ],
+        "complexity": 140.0018221456
+    },
+    "AH00022": {
+        "rule name": "AHU - Economizer Command Error -  Outside Air Damper not fully Open to take advantage of free cooling",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT OAU or FCU",
+            "(Economizer Mode = 1",
+            "OR Enthalpy < Return Enthalpy if Economizer not reporting",
+            "OR Enthalpy < 26 IF Economizer Mode and Return Enthalpy Not Reporting)",
+            "(OAT > Setpoint Temperature",
+            "OR OAT > Supply Air Temperature AND Setpoint Temperature Not Reporting)",
+            "(OAT < (Return Air Temperature - 3 \u00b0F)",
+            "OR OAT < 75 \u00b0F AND Return Air Temperature Not Reporting)",
+            "Outside Air Damper % < 90%",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has six parts.  (1) The AHU is running.  (2) The SubType is not OAU or FCU.  (3) The Economizer Mode is 1; or, Economizer is not reporting and Enthalpy is less than Return Enthalpy; or Economizer and return enthalpy are not reporting and Enthalpy is less than 26.  (4) OAT is greater than the Setpoint Temperature; or Setpoint Temperature is not reporting and OAT is greather than the Supply Air Temperature; (5) OAT is less than Return Air Temperature minus 3 degrees F; or Return Air Temperature is not reporting and OAT is less than 75 degrees F.  (6) The outside air damper % is less than 90%.  The rule is triggerd when all six parts of the condition are met for two hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "Economizer Mode",
+            "Enthalpy",
+            "Return Enthalpy",
+            "OAT (Outside Air Temperature)",
+            "Setpoint Temperature",
+            "Supply Air Temperature",
+            "Return Air Temperature",
+            "Outside Air Damper %"
+        ],
+        "complexity": 160.0012206985
+    },
+    "AH00045": {
+        "rule name": "AHU - Heating On When Return Air is Adequate",
+        "current logic": [
+            "AHU Running",
+            "SubType NOT FCU or OAU",
+            "OAT > 25 \u00b0F",
+            "(Heating Drained Flag = 0 IF Reporting)",
+            "(Return Air Temperature > Setpoint Temperature",
+            "OR Return Air Temperature > Supply Air Temperature IF Setpoint Temperature Not Reporting)",
+            "(Outside Air Damper % - Outside Air Damper Minimum % > 10%",
+            "OR Outside Air Damper > 10% IF Outside Air Damper Minimum % Not Reporting)",
+            "Heating Valve % > 5% AND\/OR Preheat Valve % > 5%",
+            "CO2 < 1000 ppm IF Reporting",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition for the rule has eight parts. (1) The AHU is Running.  (2) The SubType is not FCU or OAU.  (3) The OAT is greater than 25 degrees F.  (4) If the Heating Drained Flag is reporting and equal to 0.  (5) The return Air Temperature is greater than the Setpoint Temperature; or if Setpoint Temperature is not Reporting, Return Air Temperature is greater than Supply Air Temperature.  (6) The difference between the Outside Air Damper % and the Outside Air Damper Minimum % is greater than 10%; or if Outside Air Damper Minimum % is not reporting, Outside Air Dampter % greater than 10%.  (7) The heating valve % is greater than 5% or the Preheat Valve % is greater than 5%.  (8) CO2 is reporting and less than 1000 ppm.  The rule is triggred when all eight parts of the condition are met for two hours.",
+        "variables": [
+            "AHU Running",
+            "SubType",
+            "OAT (Outside Air Temperature)",
+            "Heating Drained Flag",
+            "Setpoint Temperature",
+            "Return Air Temperature",
+            "Supply Air Temperature",
+            "Outside Air Damper %",
+            "Outside Air Damper Minimum %",
+            "Heating Valve %",
+            "Preheat Valve %",
+            "CO2 (Carbon Dioxide)"
+        ],
+        "complexity": 204.0012212461
+    },
+    "AH00020": {
+        "rule name": "AHU - Cooling Valve Off - Discharge is less than mixed air temperature (Valve Leaking By)",
+        "current logic": [
+            "AHU Running",
+            "(10 \u00b0F < OAT < Setpoint Temperature",
+            "OR 10 \u00b0F < OAT < Supply Air Temperature AND Setpoint Temperature Not Reporting)",
+            "(Heating AND Preheat AND Reheat Valve % < 5%",
+            "OR Heating AND Preheat Valve % < 5% AND Reheat Valve % Not Reporting",
+            "OR Heating AND Reheat Valve % < 5% AND Preheat Valve % Not Reporting",
+            "OR Heating Valve % < 5% AND Preheat AND Reheat Valve % Not Reporting",
+            "OR Preheat AND Reheat Valve % < 5% AND Heating Valve % Not Reporting",
+            "OR Preheat Valve % < 5% AND Heating AND Reheat Valve % Not Reporting",
+            "OR Reheat Valve % < 5% AND Heating AND Preheat Valve % Not Reporting",
+            "OR Heating AND Preheat AND Reheat Valve % Not Reporting)",
+            "Cooling Valve % < 2%",
+            "(Mixed Air Temperature - Supply Air Temperature) > 7 \u00b0F",
+            "Met for 2 Hours"
+        ],
+        "utterance": "The condition has 6 parts. (1) The AHU is running. (2) The outdoor air temperature is between 10\u00b0F and the setpoint temperature; or, if the setpoint temperature is not reporting, it is between 10\u00b0F and the supply air temperature. (3) One of several heating valve combinations apply: heating, preheat, and reheat valve percentages are all less than 5%; or heating and preheat valve percentages are less than 5% and reheat valve is not reporting; or heating and reheat valve percentages are less than 5% and preheat valve is not reporting; or heating valve is less than 5% and preheat and reheat valves are not reporting; or preheat and reheat valves are less than 5% and heating valve is not reporting; or preheat valve is less than 5% and heating and reheat valves are not reporting; or reheat valve is less than 5% and heating and preheat valves are not reporting; or all heating, preheat, and reheat valves are not reporting. (4) The cooling valve percentage is less than 2%. (5) The mixed air temperature is greater than the supply air temperature by more than 7\u00b0F. (6) The rule is triggered when all six parts of the condition are met for 2 hours.",
+        "variables": [
+            "AHU Running",
+            "OAT (Outdoor Air Temperature)",
+            "Setpoint Temperature",
+            "Supply Air Temperature",
+            "Heating",
+            "Preheat",
+            "Preheat Valve %",
+            "Reheat Valve %",
+            "Cooling Valve %",
+            "Mixed Air Temperature"
+        ],
+        "complexity": 220.0004695712
+    }
+}

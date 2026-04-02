@@ -1,0 +1,1 @@
+{"id": "5418e838-b308-404c-b19c-b5cdda508150", "rule": "CC00007", "available_sensors": {"m04DFb7Y Schedule": "Bool", "1IMw9UlR Run Status": "Bool", "mihMjJN8 Setpoint Temperature": "Number", "bPg4eaNS Return Air Temperature": "Number", "2zxCDvbf Cooling Valve %": "Number", "type": "Str", "subType": "Str", "Status": "Bool"}}

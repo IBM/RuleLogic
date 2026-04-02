@@ -1,0 +1,1 @@
+{"id": "507ad55e-5a68-4e56-b825-f0f1e441fef5", "rule": "HX00004", "available_sensors": {"7wDEi4uOEZwfUa Hot Water Return Temperature": "Number", "3If4to1c Heating Valve %": "Number", "nGyOTv40 Heating System Status": "Bool", "scqyQ9jn Hot Water Setpoint": "Number", "gmLYjprC Hot Water Temperature": "Number", "type": "Str", "subType": "Str"}}

@@ -1,0 +1,1 @@
+{"id": "03b2f10a-d177-4994-b72f-8a44c363c5af", "rule": "BR00004", "available_sensors": {"pRuXCadc OHOBOILEGti6uoXA Return Temperature": "Number", "r6Eqg5FU OHOBOILEUbh9gevN Run Status": "Bool", "EO1kNpO1 OHOBOILEF8Cspcod Supply Temperature": "Number", "type": "Str", "subType": "Str", "Status": "Bool"}}
