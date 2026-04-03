@@ -27,7 +27,7 @@ pip install -e .
 
 The package requires:
 
-- Python 3.8+
+- Python 3.13+
 - pandas
 - numpy
 - matplotlib
