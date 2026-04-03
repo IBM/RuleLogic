@@ -161,7 +161,7 @@ Contains time-series sensor measurements for each anomaly instance. Data is stor
 import json
 
 # Load rule definitions
-with open('clean_data/rules.json', 'r') as f:
+with open('rules.json', 'r') as f:
     rules = json.load(f)
 
 # Access specific rule
@@ -179,7 +179,7 @@ print(f"Logic: {rule['current logic']}")
 import json
 
 # Load ground truth annotations
-with open('clean_data/ground_truth.json', 'r') as f:
+with open('ground_truth.json', 'r') as f:
     ground_truth = json.load(f)
 
 # Find specific anomaly window
@@ -191,8 +191,9 @@ print(f"Anomaly window: {anomaly['start_datetime_utc']} to {anomaly['end_datetim
 ### Loading Instance Data
 
 ```python
+import json
 # Load instance definition
-instance_file = 'clean_data/instances/AH00035_5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json'
+instance_file = 'instances/AH00035_5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json'
 with open(instance_file, 'r') as f:
     instance = json.load(f)
 
@@ -205,9 +206,10 @@ print(f"Rule: {rule_id}, Sensors: {len(available_sensors)}")
 
 ```python
 import pandas as pd
+import json
 
 # Load sensor time-series data
-sensor_file = 'clean_data/sensor_data/5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json'
+sensor_file = 'sensor_data/5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json'
 with open(sensor_file, 'r') as f:
     sensor_data = json.load(f)
 
@@ -222,19 +224,31 @@ print(f"Time range: {df.index.min()} to {df.index.max()}")
 
 ### Using with rule-logic-eval Package
 
+Install the package using pip:
+```bash
+pip install -e rule-logic-eval
+```
+
 ```bash
 # View rule information
 rulogic clauses AH00035
 rulogic variables AH00035
 
 # View instance details
-rulogic sensors clean_data/instances/AH00035_5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json
+rulogic sensors instances/AH00035_5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json
 
 # Plot sensor data with ground truth overlay
-rulogic plot_gt clean_data/instances/AH00035_5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json
+rulogic plot-gt instances/AH00035_5caf3b2b-7e81-4ff0-9dd7-6eb500b310a0.json
 
 # Batch plot all instances
-rulogic plot_all_instances clean_data/instances/ --figpath figures/
+rulogic plot-all-instances instances/ --figpath figures/
+```
+
+Or, alternatively with uv:
+```bash
+uv init --bare --python 3.13    # assuming no .venv yet
+uv add rule-logic-eval          # adds the package
+uv run rulogic clauses AH00035  # run a sample command
 ```
 
 ## Data Quality
@@ -263,4 +277,3 @@ Rules are categorized by complexity score, which reflects the number of variable
 
 - `n` = number of unique variables
 - `k` = logic length (with penalties for OR/IF statements)
->>>>>>> a31e61a (adds clean dataset for review)
