@@ -1,6 +1,6 @@
 [project]
 name = "rule-logic-eval"
-version = "0.1.0"
+version = "1.0.1"
 description = "Evaluation of experiments on rule logic benchamrk"
 readme = "README.md"
 authors = [

@@ -383,7 +383,14 @@ def plot_gt(
 
     # Save or display
     if figpath:
-        fig.savefig(f'{figpath}/{ruleid}_{anomaly_id}.png')
+        # error if directory doesn't exist
+        if (os.path.exists(figpath) or os.path.isdir(figpath)) == False:
+            fpth = Path.cwd().joinpath(figpath)
+            raise FileNotFoundError(f"Directory {str(fpth)} not found; please create it.")
+
+        # build the figure path and write the file
+        pth = Path.cwd().joinpath(figpath, f"{ruleid}_{anomaly_id}.png")
+        fig.savefig(pth)
         plt.close()
     else:
         plt.show()
@@ -429,14 +436,14 @@ def plot_all_instances(
         with open(instance_dir, 'r') as f:
             instance_list = f.read().split('\n')
     else:  # Instance dir is folder
-        instance_list = os.listdir(instance_dir)
-
+        dirlist = os.listdir(instance_dir)
+        instance_list = [str(Path.cwd().joinpath(instance_dir, ent )) for ent in dirlist]
     # Plot each instance
     for instance in instance_list:
         if instance.startswith('.'):
             continue
         plot_gt(
-            'instances/' + instance + '.json',
+            instance,
             truthfile=truthfile,
             matching_method=matching_method,
             pen_rule=pen_rule,
