@@ -316,3 +316,11 @@ python -m rule_logic_eval.cli embeddings instances/AH00035_abc123.json \
 python -m rule_logic_eval.cli embeddings instances/AH00035_abc123.json \
   --matching-method ot --pen-rule 1.0 --plot
 ```
+
+
+## Version History
+
+| Version | Date          | Description                                            | 
+| --------|---------------|--------------------------------------------------------|
+| 1.0.1   |  3 April 2026 | semantic versioning; fix plot-all-instances (issue #3) |
+| 0.1.0   |  2 April 2026 | initial version                                        | 
